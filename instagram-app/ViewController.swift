@@ -9,12 +9,13 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "plus_photo").withRenderingMode(.alwaysOriginal), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(plusPhotoButtonPressed(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -61,6 +62,28 @@ class ViewController: UIViewController {
         return button
     }()
     
+    @objc func plusPhotoButtonPressed(sender: UIButton){
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        self.present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage{
+            self.plusPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        }else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage
+        {
+            self.plusPhotoButton.setImage(originalImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        // Making rounded frame
+        self.plusPhotoButton.layer.cornerRadius = self.plusPhotoButton.frame.width / 2
+        self.plusPhotoButton.layer.masksToBounds = true
+        self.plusPhotoButton.layer.borderColor = UIColor.lightGray.cgColor
+        self.plusPhotoButton.layer.borderWidth = 3
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @objc func signUpButtonPressed(sender: UIButton){
         
         guard let email = emailTextField.text, !email.isEmpty else { return }
@@ -73,6 +96,39 @@ class ViewController: UIViewController {
                 return
             }
             print("Successfully created user: ", data?.user.uid ?? "")
+            guard let image = self.plusPhotoButton.imageView?.image else {return}
+            guard let uploadData = UIImageJPEGRepresentation(image, 0.3) else {return}
+            let filename = NSUUID().uuidString
+            let storageRef = Storage.storage().reference().child("profile_images").child(filename)
+            storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                if let error = error {
+                    print("Failed to upload profile image: ", error)
+                    return
+                }
+                storageRef.downloadURL(completion: { (downloadURL, err) in
+                    if let err = err {
+                        print("Failed to fetch downloadURL: ", err)
+                        return
+                    }
+                    guard let profileImageURL = downloadURL?.absoluteString else {return}
+                    
+                    guard let uid = data?.user.uid else {return}
+                    let dictionaryValues = ["username": username, "profileImageUrl": profileImageURL]
+                    let values = [uid: dictionaryValues]
+                    
+                    Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (error, ref) in
+                        if let error = error{
+                            print("Failed to save user info into DB: ", error)
+                            return
+                        }
+                        print("Successfully saved user into fo DB")
+                    })
+                    
+                    print("Successfully uploaded profile image: ", profileImageURL)
+                })
+            })
+            
+
         }
     }
     
