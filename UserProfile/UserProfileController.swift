@@ -17,6 +17,28 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         self.collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerID")
         self.collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellID")
         fetchUser()
+        setupLogOutButton()
+    }
+    
+    fileprivate func setupLogOutButton(){
+        // Adding the logout gear button
+        // .withRenderingMode(.alwaysOriginal) gets rid of the system blue tint
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(logOutButtonPressed(sender:)))
+    }
+    
+    @objc func logOutButtonPressed(sender: UIButton){
+        // preferredStyle .alert pops in the middle
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
+            do{
+                try Auth.auth().signOut()
+                // Present the log in controller
+            }catch let signOutError{
+                
+            }
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancle", style: .cancel, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
