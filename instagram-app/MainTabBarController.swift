@@ -20,8 +20,13 @@ class MainTabBarController: UITabBarController {
                 let navController = UINavigationController(rootViewController: loginController)
                 self.present(navController, animated: true, completion: nil)
             }
+            return
         }
-        return
+        setupViewControllers()
+    }
+    
+    func setupViewControllers(){
+        
         // UITabBarController takes in an array of UIViewControllers
         let layout = UICollectionViewFlowLayout()
         let userProfileController = UserProfileController(collectionViewLayout: layout)
@@ -32,5 +37,12 @@ class MainTabBarController: UITabBarController {
         navController.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile_selected")
         tabBar.tintColor = .black
         self.viewControllers = [navController, UIViewController()]
+        
+        
+        
+        
+        
+        
+        
     }
 }
