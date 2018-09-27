@@ -76,7 +76,6 @@
 				0A274AB6215709CA001A8160 /* AppDelegate.swift */,
 				0A274AB8215709CA001A8160 /* ViewController.swift */,
 				0AC663152159C6F900125386 /* MainTabBarController.swift */,
-				0A6C78C1215AB78E00284EBE /* UserProfileController.swift */,
 				0A274ABD215709CD001A8160 /* Assets.xcassets */,
 				0A274ABF215709CD001A8160 /* LaunchScreen.storyboard */,
 				0A274ACB21572E3B001A8160 /* GoogleService-Info.plist */,
@@ -96,6 +95,7 @@
 		0A6C78C3215AC73600284EBE /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				0A6C78C1215AB78E00284EBE /* UserProfileController.swift */,
 				0A6C78C4215AC74C00284EBE /* UserProfileHeader.swift */,
 			);
 			path = UserProfile;

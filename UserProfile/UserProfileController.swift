@@ -15,6 +15,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         super.viewDidLoad()
         self.collectionView?.backgroundColor = .white
         self.collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerID")
+        self.collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellID")
         fetchUser()
     }
     
@@ -23,11 +24,33 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         header.user = self.user
         return header
     }
-    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 100
+    }
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath)
+        cell.backgroundColor = .purple
+        return cell
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: self.view.frame.width, height: 200)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) ->CGSize {
+        // -2 for the two vertical spacing
+        let width = (self.view.frame.width - 2) / 3
+        return CGSize(width: width, height: width)
+    }
+    
+    // Vertical Spacing
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    // Horizontal Spacing
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
     // private to the file, fetching the user name
     fileprivate func fetchUser(){
         guard let uid = Auth.auth().currentUser?.uid else {return}
@@ -36,8 +59,6 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             guard let dictionary = snapshot.value as? [String: Any] else {return}
             self.user = User(dictionary: dictionary)
             self.navigationItem.title = self.user?.username
-            
-            
             self.collectionView?.reloadData()
         }) { (error) in
             print("Failed to fetch user: ", error)
