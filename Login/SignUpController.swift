@@ -62,6 +62,20 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         return button
     }()
     
+    let alreadyHaveAccountButton: UIButton = {
+        let button = UIButton(type: .system)
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+        attributedTitle.append(NSAttributedString(string: "Login", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.rgb(red: 17, green: 154, blue: 237)]))
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.addTarget(self, action: #selector(alreadyHaveAccountButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func alreadyHaveAccountButtonPressed(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     @objc func plusPhotoButtonPressed(sender: UIButton){
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -165,6 +179,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
 //        self.emailTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
 //        self.emailTextField.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 40).isActive = true
 //        self.emailTextField.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -40).isActive = true
+        self.view.addSubview(self.alreadyHaveAccountButton)
+        self.alreadyHaveAccountButton.anchor(top: nil, paddingTop: 0, left: self.view.leftAnchor, paddingLeft: 0, bottom: self.view.bottomAnchor, paddingBottom: 0, right: self.view.rightAnchor, paddingRight: 0, width: 0, height: 50)
     }
     
     fileprivate func setupInputFields(){
