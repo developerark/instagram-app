@@ -27,22 +27,41 @@ class MainTabBarController: UITabBarController {
     
     func setupViewControllers(){
         
-        // UITabBarController takes in an array of UIViewControllers
-        let layout = UICollectionViewFlowLayout()
-        let userProfileController = UserProfileController(collectionViewLayout: layout)
-        let navController = UINavigationController(rootViewController: userProfileController)
+        // Home
+        let homeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected")
+            , rootViewController: UserProfileController(collectionViewLayout: UICollectionViewFlowLayout()))
         
-        // Adding the tab bar Icon for the userProfileController
-        navController.tabBarItem.image = #imageLiteral(resourceName: "profile_unselected")
-        navController.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile_selected")
-        tabBar.tintColor = .black
-        self.viewControllers = [navController, UIViewController()]
+        // Search
+        let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected")
+            , rootViewController: UserProfileController(collectionViewLayout: UICollectionViewFlowLayout()))
         
+        // Plus
+        let plusNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected")
+            , rootViewController: UserProfileController(collectionViewLayout: UICollectionViewFlowLayout()))
         
+        // Like
+        let likeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "like_unselected"), selectedImage: #imageLiteral(resourceName: "like_selected")
+            , rootViewController: UserProfileController(collectionViewLayout: UICollectionViewFlowLayout()))
         
+        // User Profile
+        let userProfileNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "profile_unselected"), selectedImage: #imageLiteral(resourceName: "profile_selected"), rootViewController: UserProfileController(collectionViewLayout: UICollectionViewFlowLayout()))
         
+        self.tabBar.tintColor = .black
+        self.viewControllers = [homeNavController, searchNavController, plusNavController, likeNavController, userProfileNavController]
         
-        
-        
+        // modify tab bar item insets
+        guard let items = self.tabBar.items else {return}
+        for item in items{
+            item.imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
+        }
+    }
+    
+    fileprivate func templateNavController(unselectedImage: UIImage, selectedImage: UIImage, rootViewController: UIViewController = UIViewController()) -> UINavigationController{
+        // Adding HomeController
+        let viewController = rootViewController
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.tabBarItem.image = unselectedImage
+        navController.tabBarItem.selectedImage = selectedImage
+        return navController
     }
 }
