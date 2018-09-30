@@ -9,9 +9,22 @@
 import UIKit
 import Firebase
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let index = self.viewControllers?.index(of: viewController)
+        if index == 2{
+            let photoSelectorController = PhotoSelectorController(collectionViewLayout: UICollectionViewFlowLayout())
+            let photoSelectorNavController = UINavigationController(rootViewController: photoSelectorController)
+            self.present(photoSelectorNavController, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate = self
         print(Auth.auth().currentUser)
         if Auth.auth().currentUser == nil{
             // Present a login controller
