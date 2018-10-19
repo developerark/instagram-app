@@ -16,6 +16,7 @@
 		0A6C78C2215AB78E00284EBE /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C78C1215AB78E00284EBE /* UserProfileController.swift */; };
 		0A6C78C5215AC74C00284EBE /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C78C4215AC74C00284EBE /* UserProfileHeader.swift */; };
 		0A6C78C8215C65D500284EBE /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C78C7215C65D500284EBE /* LoginController.swift */; };
+		0AA193512179F0810003DFD3 /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA193502179F0810003DFD3 /* PhotoSelectorHeader.swift */; };
 		0AC663162159C6F900125386 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC663152159C6F900125386 /* MainTabBarController.swift */; };
 		0AEE4FEB21604AFD0042CFF3 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE4FEA21604AFD0042CFF3 /* PhotoSelectorController.swift */; };
 		0AEE4FED21605D250042CFF3 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE4FEC21605D250042CFF3 /* PhotoSelectorCell.swift */; };
@@ -35,6 +36,7 @@
 		0A6C78C4215AC74C00284EBE /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		0A6C78C7215C65D500284EBE /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		0A867DA12157487400D5439F /* instagram-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "instagram-app.entitlements"; sourceTree = "<group>"; };
+		0AA193502179F0810003DFD3 /* PhotoSelectorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeader.swift; sourceTree = "<group>"; };
 		0AC663152159C6F900125386 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		0AEE4FEA21604AFD0042CFF3 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
 		0AEE4FEC21605D250042CFF3 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				0AEE4FEA21604AFD0042CFF3 /* PhotoSelectorController.swift */,
+				0AA193502179F0810003DFD3 /* PhotoSelectorHeader.swift */,
 				0AEE4FEC21605D250042CFF3 /* PhotoSelectorCell.swift */,
 			);
 			path = AddPhoto;
@@ -274,6 +277,7 @@
 				0A6C78C2215AB78E00284EBE /* UserProfileController.swift in Sources */,
 				0A274ACA21571DFD001A8160 /* Extentions.swift in Sources */,
 				0A6C78C8215C65D500284EBE /* LoginController.swift in Sources */,
+				0AA193512179F0810003DFD3 /* PhotoSelectorHeader.swift in Sources */,
 				0AEE4FEB21604AFD0042CFF3 /* PhotoSelectorController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
