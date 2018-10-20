@@ -12,7 +12,8 @@
 		0A274ABE215709CD001A8160 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A274ABD215709CD001A8160 /* Assets.xcassets */; };
 		0A274AC1215709CD001A8160 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A274ABF215709CD001A8160 /* LaunchScreen.storyboard */; };
 		0A274ACA21571DFD001A8160 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A274AC921571DFD001A8160 /* Extentions.swift */; };
-		0A274ACC21572E3B001A8160 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A274ACB21572E3B001A8160 /* GoogleService-Info.plist */; };
+		0A400855217B9B53001785E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A400854217B9B53001785E4 /* GoogleService-Info.plist */; };
+		0A400857217B9D09001785E4 /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A400856217B9D09001785E4 /* SharePhotoController.swift */; };
 		0A6C78C2215AB78E00284EBE /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C78C1215AB78E00284EBE /* UserProfileController.swift */; };
 		0A6C78C5215AC74C00284EBE /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C78C4215AC74C00284EBE /* UserProfileHeader.swift */; };
 		0A6C78C8215C65D500284EBE /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C78C7215C65D500284EBE /* LoginController.swift */; };
@@ -31,7 +32,8 @@
 		0A274AC0215709CD001A8160 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A274AC2215709CD001A8160 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A274AC921571DFD001A8160 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
-		0A274ACB21572E3B001A8160 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0A400854217B9B53001785E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0A400856217B9D09001785E4 /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
 		0A6C78C1215AB78E00284EBE /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		0A6C78C4215AC74C00284EBE /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		0A6C78C7215C65D500284EBE /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -87,7 +89,7 @@
 				0AC663152159C6F900125386 /* MainTabBarController.swift */,
 				0A274ABD215709CD001A8160 /* Assets.xcassets */,
 				0A274ABF215709CD001A8160 /* LaunchScreen.storyboard */,
-				0A274ACB21572E3B001A8160 /* GoogleService-Info.plist */,
+				0A400854217B9B53001785E4 /* GoogleService-Info.plist */,
 				0A274AC2215709CD001A8160 /* Info.plist */,
 			);
 			path = "instagram-app";
@@ -125,6 +127,7 @@
 				0AEE4FEA21604AFD0042CFF3 /* PhotoSelectorController.swift */,
 				0AA193502179F0810003DFD3 /* PhotoSelectorHeader.swift */,
 				0AEE4FEC21605D250042CFF3 /* PhotoSelectorCell.swift */,
+				0A400856217B9D09001785E4 /* SharePhotoController.swift */,
 			);
 			path = AddPhoto;
 			sourceTree = "<group>";
@@ -212,8 +215,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A274AC1215709CD001A8160 /* LaunchScreen.storyboard in Resources */,
+				0A400855217B9B53001785E4 /* GoogleService-Info.plist in Resources */,
 				0A274ABE215709CD001A8160 /* Assets.xcassets in Resources */,
-				0A274ACC21572E3B001A8160 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A400857217B9D09001785E4 /* SharePhotoController.swift in Sources */,
 				0A274AB9215709CA001A8160 /* SignUpController.swift in Sources */,
 				0AEE4FED21605D250042CFF3 /* PhotoSelectorCell.swift in Sources */,
 				0A274AB7215709CA001A8160 /* AppDelegate.swift in Sources */,
@@ -418,6 +422,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W866J68265;
 				INFOPLIST_FILE = "instagram-app/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -437,6 +442,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W866J68265;
 				INFOPLIST_FILE = "instagram-app/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -79,6 +79,8 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedImage = images[indexPath.item]
         self.collectionView?.reloadData()
+        let indexPath = IndexPath(item: 0, section: 0)
+        self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: true)
     }
     
     // Rendering the Header
@@ -87,8 +89,13 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: self.view.frame.width, height: self.view.frame.width)
     }
+    
+    // Referencing the header to pass on to the SharePhotoController
+    var header: PhotoSelectorHeader?
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.headerID, for: indexPath) as! PhotoSelectorHeader
+        self.header = header
         header.photoImageView.image = self.selectedImage
         
         // Fetch the high res image for the selected image
@@ -135,6 +142,8 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     }
     
     @objc func nextButtonPressed(sender: UIBarButtonItem){
-        print("nextButtonPressed")
+        let sharePhotoController = SharePhotoController()
+        sharePhotoController.image = header?.photoImageView.image
+        self.navigationController?.pushViewController(sharePhotoController, animated: true)
     }
 }
