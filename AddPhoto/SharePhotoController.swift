@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 class SharePhotoController: UIViewController {
     
     var image: UIImage?{
@@ -60,6 +60,50 @@ class SharePhotoController: UIViewController {
     }
 
     @objc func shareButtonPressed(sender: UIBarButtonItem){
-        print("Sharing Photo")
+        // checking if caption is not empty
+        guard let caption = textView.text, caption.characters.count > 0 else {return}
+        guard let image = self.image else {return}
+        guard let uploadData = UIImageJPEGRepresentation(image, 0.5) else {return}
+        
+        // Disable share button after pressing once
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        let filename = NSUUID().uuidString
+        let storageReference = Storage.storage().reference().child("posts").child(filename)
+        storageReference.putData(uploadData, metadata: nil) { (metadata, error) in
+            if let error = error{
+                // Reenable share button if error occurs
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                print("Failed to upload post image:", error)
+                return
+            }
+            storageReference.downloadURL(completion: { (downloadURL, error) in
+                if let error = error{
+                    print("Failed to fetch downloadURL", error)
+                    return
+                }
+                guard let imageUrl = downloadURL?.absoluteString else {return}
+                print("Successfully uploaded post image:", imageUrl)
+                
+                self.saveToDBWithImageUrl(imageUrl: imageUrl)
+            })
+        }
+    }
+    
+    fileprivate func saveToDBWithImageUrl(imageUrl: String){
+        guard let postImage = self.image else {return}
+        guard let caption = self.textView.text else {return}
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let userPostRef = Database.database().reference().child("posts").child(uid)
+        let ref = userPostRef.childByAutoId()
+        // Heterogeneous dictionary needs to cast
+        let values = ["imageUrl": imageUrl, "caption": caption, "imageWidth": postImage.size.width, "imageHeight": postImage.size.height, "creationDate": Date().timeIntervalSince1970] as [String: Any]
+        ref.updateChildValues(values) { (err, ref) in
+            if let err = err {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                print("Failed to save post to DB", err)
+                return
+            }
+            print("successfully saved post to DB")
+            self.dismiss(animated: true, completion: nil)        }
     }
 }

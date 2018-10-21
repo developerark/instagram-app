@@ -27,7 +27,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     var assets = [PHAsset]()
     fileprivate func assetFetchOptions() -> PHFetchOptions{
         let fetchOptions = PHFetchOptions()
-        fetchOptions.fetchLimit = 100
+        fetchOptions.fetchLimit = 2000
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         fetchOptions.sortDescriptors = [sortDescriptor]
         return fetchOptions
@@ -103,7 +103,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         if let selectedImage = self.selectedImage{
             if let index = self.images.index(of: selectedImage){
                 let selectedAsset = self.assets[index]
-                imageManager.requestImage(for: selectedAsset, targetSize: CGSize(width: 600, height: 600), contentMode: .aspectFit, options: nil) { (image, info) in
+                imageManager.requestImage(for: selectedAsset, targetSize: CGSize(width: 1024, height: 1024), contentMode: .aspectFit, options: nil) { (image, info) in
                     header.photoImageView.image = image
 
                 }
