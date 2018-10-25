@@ -12,7 +12,8 @@ import Firebase
 class UserProfileHeader: UICollectionViewCell {
     var user: User?{
         didSet{
-            setupProfileImage()
+            guard let profileImageUrl = self.user?.profileImageUrl else {return}
+            self.profileImageView.loadImage(urlString: profileImageUrl)
             self.usernameLabel.text = self.user?.username
         }
     }
@@ -38,8 +39,8 @@ class UserProfileHeader: UICollectionViewCell {
     }()
     
     
-    let profileImageView: UIImageView = {
-        let iv = UIImageView()
+    let profileImageView: CustomImageView = {
+        let iv = CustomImageView()
         return iv
     }()
     
@@ -115,24 +116,6 @@ class UserProfileHeader: UICollectionViewCell {
         stackView.distribution = .fillEqually
         self.addSubview(stackView)
         stackView.anchor(top: self.topAnchor, paddingTop: 12, left: self.profileImageView.rightAnchor, paddingLeft: 12, bottom: nil, paddingBottom: 0, right: self.rightAnchor, paddingRight: 12, width: 0, height: 50)
-    }
-    
-    fileprivate func setupProfileImage(){
-        guard let profileImageUrl = user?.profileImageUrl else {return}
-        guard let url = URL(string: profileImageUrl) else {return}
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print("Failed to fetch profile image: ", error)
-                return
-            }
-            // perhaps also check for response status of 200 (HTTP OK)
-            // check for error and fetch image
-            guard let data = data else {return}
-            let image = UIImage(data: data)
-            DispatchQueue.main.async {
-                self.profileImageView.image = image
-            }
-        }.resume()
     }
     
     required init?(coder aDecoder: NSCoder) {

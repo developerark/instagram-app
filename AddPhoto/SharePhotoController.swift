@@ -25,6 +25,7 @@ class SharePhotoController: UIViewController {
         self.view.backgroundColor = UIColor.rgb(red: 240, green: 240, blue: 240)
         // setting the right bar button item
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share", style: .plain, target: self, action: #selector(shareButtonPressed(sender:)))
+        self.navigationController?.navigationBar.tintColor = .black
         self.setupImageAndTextViews()
     }
     
